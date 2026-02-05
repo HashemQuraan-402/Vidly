@@ -1,0 +1,1 @@
+Vidly is a Project for viewing moves table for custumers and information about these moves , the project contain admin page for add,delete and change moves, the project developed using django
