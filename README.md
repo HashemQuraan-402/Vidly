@@ -1,1 +1,219 @@
-Vidly is a Project for viewing moves table for custumers and information about these moves , the project contain admin page for add,delete and change moves, the project developed using django
+Vidly — Django Movie Catalog
+
+Vidly is a lightweight movie-catalog web application built with Django. It demonstrates server-side rendering, relational data modeling, Django administration, and a REST-style movie resource.
+
+Features
+
+Browse all movies in a responsive table.
+
+View the details of an individual movie.
+
+Store movie title, release year, stock quantity, daily rate, genre, and creation date.
+
+Organize movies by genre using a relational database model.
+
+Manage movies and genres through the Django admin site.
+
+Access movie data through a Tastypie API resource.
+
+Configure sensitive settings through environment variables.
+
+Serve static files with WhiteNoise.
+
+Tech Stack
+
+Python
+
+Django 5.2.7
+
+SQLite
+
+Django Tastypie
+
+HTML and Django Templates
+
+Bootstrap 5
+
+Gunicorn
+
+WhiteNoise
+
+Project Structure
+
+Vidly/
+├── api/                    # Tastypie movie API resource
+├── movies/                 # Movie models, views, routes, and templates
+│   ├── migrations/         # Database schema migrations
+│   └── templates/movies/   # Movie list and detail pages
+├── templates/              # Shared base template
+├── vidly/                  # Project settings, root routes, and home page
+├── .env.example            # Required environment-variable names
+├── manage.py               # Django command-line utility
+├── requirements.txt        # Python dependencies
+└── Procfile                # Gunicorn process declaration
+
+Data Model
+
+The application contains two related entities:
+
+Genre: stores the genre name.
+
+Movie: stores the title, release year, number in stock, daily rate, creation date, and a foreign-key relationship to Genre.
+
+Deleting a genre also deletes its related movies because the relationship uses Django's CASCADE behavior.
+
+Getting Started
+
+Prerequisites
+
+Python 3.13 recommended by the included Pipfile
+
+Git
+
+1. Clone the repository
+
+git clone https://github.com/HashemQuraan-402/Vidly.git
+cd Vidly
+
+2. Create a virtual environment
+
+python -m venv .venv
+
+Activate it on Windows PowerShell:
+
+.\.venv\Scripts\Activate.ps1
+
+Activate it on macOS or Linux:
+
+source .venv/bin/activate
+
+3. Install the dependencies
+
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+
+4. Configure the environment variables
+
+The required variable names are documented in .env.example. The application reads them from the operating-system environment; it does not load the .env file automatically.
+
+For Windows PowerShell:
+
+$env:DJANGO_SECRET_KEY = (python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())")
+$env:DJANGO_DEBUG = "True"
+$env:DJANGO_ALLOWED_HOSTS = "localhost,127.0.0.1"
+
+For macOS or Linux:
+
+export DJANGO_SECRET_KEY="$(python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())')"
+export DJANGO_DEBUG="True"
+export DJANGO_ALLOWED_HOSTS="localhost,127.0.0.1"
+
+Never commit a real secret key or a local .env file.
+
+5. Create the local database
+
+python manage.py migrate
+
+6. Create an administrator account
+
+python manage.py createsuperuser
+
+Follow the prompts to choose a username, email address, and password.
+
+7. Run the application
+
+python manage.py runserver
+
+Open http://127.0.0.1:8000/ in your browser.
+
+Application Routes
+
+Route
+
+Purpose
+
+/
+
+Application home page
+
+/movies/
+
+Movie catalog
+
+/movies/<id>
+
+Details for a specific movie
+
+/admin/
+
+Django administration site
+
+/api/movies/
+
+Movie API collection
+
+/api/movies/<id>/
+
+Movie API detail resource
+
+Adding Sample Data
+
+Start the development server.
+
+Open http://127.0.0.1:8000/admin/.
+
+Sign in with the superuser account.
+
+Add one or more genres.
+
+Add movies and assign each movie to a genre.
+
+Open http://127.0.0.1:8000/movies/ to view the catalog.
+
+The SQLite database is created locally and is intentionally excluded from Git, so every developer begins with a clean database.
+
+Validation
+
+Run Django's configuration checks:
+
+python manage.py check
+
+Run the test command:
+
+python manage.py test
+
+Configuration and Security
+
+DJANGO_SECRET_KEY is required and must be kept private.
+
+DJANGO_DEBUG defaults to False when it is not supplied.
+
+DJANGO_ALLOWED_HOSTS accepts a comma-separated list of hosts.
+
+db.sqlite3 and local environment files are ignored by Git.
+
+Production secrets should be configured through the hosting provider, never committed to the repository.
+
+Future Improvements
+
+Add search, filtering, and pagination.
+
+Add user authentication and authorization for the API.
+
+Add create, update, and delete screens outside the admin site.
+
+Add model, view, and API test coverage.
+
+Add API documentation and validation.
+
+Use PostgreSQL for production deployment.
+
+Add screenshots and a hosted demonstration.
+
+Author
+
+Hashem Quraan
+
+GitHub: HashemQuraan-402
+
+LinkedIn: hashem-quraan-b561453ab
